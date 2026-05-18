@@ -1,0 +1,113 @@
+# Day 01 Linux Command Practice
+
+# mkdir → naya folder banane ke liye
+mkdir practice
+
+# ls → folder/file list dekhne ke liye
+ls
+
+# cd → folder ke andar jane ke liye
+cd practice
+
+# pwd → current location/path dekhne ke liye
+pwd
+
+# whoami → current user ka naam dekhne ke liye
+whoami
+
+# touch → nayi file banane ke liye
+touch demo.txt
+
+# ls → check karne ke liye file bani ya nahi
+ls
+
+# echo → file mein text likhne ke liye
+echo "Line 1" > demo.txt
+echo "Line 2" >> demo.txt
+
+# cat → puri file dekhne ke liye
+cat demo.txt
+
+# head → starting ki lines dekhne ke liye
+head demo.txt
+
+# head -n 2 → sirf pehli 2 lines dekhne ke liye
+head -n 2 demo.txt
+
+# tail → last ki lines dekhne ke liye
+tail demo.txt
+
+# tail -n 2 → last 2 lines dekhne ke liye
+tail -n 2 demo.txt
+
+# vim → file edit karne ke liye
+vim demo.txt
+
+# vim ke andar:
+# i dabao → insert mode
+# text likho
+# Esc dabao
+# :wq → save karke bahar aao
+
+# rm → file delete karne ke liye
+rm demo.txt
+
+# rm -r → folder delete karne ke liye
+cd ..
+rm -r practice# Day 01 Linux Command Practice
+
+# mkdir → naya folder banane ke liye
+mkdir practice
+
+# ls → folder/file list dekhne ke liye
+ls
+
+# cd → folder ke andar jane ke liye
+cd practice
+
+# pwd → current location/path dekhne ke liye
+pwd
+
+# whoami → current user ka naam dekhne ke liye
+whoami
+
+# touch → nayi file banane ke liye
+touch demo.txt
+
+# ls → check karne ke liye file bani ya nahi
+ls
+
+# echo → file mein text likhne ke liye
+echo "Line 1" > demo.txt
+echo "Line 2" >> demo.txt
+
+# cat → puri file dekhne ke liye
+cat demo.txt
+
+# head → starting ki lines dekhne ke liye
+head demo.txt
+
+# head -n 2 → sirf pehli 2 lines dekhne ke liye
+head -n 2 demo.txt
+
+# tail → last ki lines dekhne ke liye
+tail demo.txt
+
+# tail -n 2 → last 2 lines dekhne ke liye
+tail -n 2 demo.txt
+
+# vim → file edit karne ke liye
+vim demo.txt
+
+# vim ke andar:
+# i dabao → insert mode
+# text likho
+# Esc dabao
+# :wq → save karke bahar aao
+
+# rm → file delete karne ke liye
+rm demo.txt
+
+# rm -r → folder delete karne ke liye
+cd ..
+rm -r practice
