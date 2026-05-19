@@ -1,4 +1,4 @@
-# Day 02 Linux Command Practice
+# Day 01 Linux Command Practice
 
 # mkdir → naya folder banane ke liye
 mkdir practice

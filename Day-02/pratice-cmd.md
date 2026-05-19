@@ -1,0 +1,53 @@
+# Day 02  Linux Process & System Commands Practice
+
+# ps → running processes dekhne ke liye
+ps
+
+# ps aux → sabhi running processes detail mein dekhne ke liye
+ps aux
+
+# top → live running processes aur system usage dekhne ke liye
+top
+
+# sleep → kuch seconds wait karne ke liye
+sleep 5
+
+# Example:
+# 5 second tak terminal wait karega
+
+# kill → process band karne ke liye
+# pehle process id (PID) dekho
+ps aux
+
+# Example:
+kill 1234
+
+# yahan 1234 PID hota hai
+
+# kill -9 → forcefully process band karne ke liye
+kill -9 1234
+
+# systemctl → services manage karne ke liye
+
+# service status check karna
+systemctl status ssh
+
+# service start karna
+systemctl start ssh
+
+# service stop karna
+systemctl stop ssh
+
+# service restart karna
+systemctl restart ssh
+
+# journalctl → system logs dekhne ke liye
+
+# saare logs dekhna
+journalctl
+
+# latest logs dekhna
+journalctl -n 20
+
+# live logs dekhna
+journalctl -f
