@@ -21,7 +21,7 @@ ps aux
 
 # Example:
 kill 1234
-
+pratice-cmd.md
 # yahan 1234 PID hota hai
 
 # kill -9 → forcefully process band karne ke liye
