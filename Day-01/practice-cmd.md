@@ -1,48 +1,75 @@
 Day 01 Learn (Linux Command Practice)
 
 1. mkdir → naya folder banane ke liye
-mkdir practice
+
+- mkdir practice
+
 
 2. ls → folder/file list dekhne ke liye
-ls
+
+- ls
+
 
 3. cd → folder ke andar jane ke liye
-cd practice
+
+- cd practice
+
 
 4. pwd → current location/path dekhne ke liye
-pwd
+
+- pwd
+
 
 5. whoami → current user ka naam dekhne ke liye
-whoami
+
+- whoami
+
 
 6. touch → nayi file banane ke liye
-touch demo.txt
+
+- touch demo.txt
+
 
 7. ls → check karne ke liye file bani ya nahi
-ls
+
+- ls
+
 
 8. echo → file mein text likhne ke liye
 
-echo "Line 1" > demo.txt
-echo "Line 2" >> demo.txt
+- echo "Line 1" > demo.txt
+- echo "Line 2" >> demo.txt
+
 
 9. cat → puri file dekhne ke liye
-cat demo.txt
+
+- cat demo.txt
+
 
 10. head → starting ki lines dekhne ke liye
-head demo.txt
+
+- head demo.txt
+
 
 11. head -n 2 → sirf pehli 2 lines dekhne ke liye
-head -n 2 demo.txt
+
+- head -n 2 demo.txt
+
 
 12. tail → last ki lines dekhne ke liye
-tail demo.txt
+
+- tail demo.txt
+
 
 13. tail -n 2 → last 2 lines dekhne ke liye
-tail -n 2 demo.txt
+
+- tail -n 2 demo.txt
+
 
 14. vim → file edit karne ke liye
-vim demo.txt
+
+- vim demo.txt
+
 
 15. vim ke andar:
 
@@ -51,10 +78,16 @@ vim demo.txt
 - Esc dabao
 - :wq → save karke bahar aao
 
+
 16. rm → file delete karne ke liye
-rm demo.txt
+
+- rm demo.txt
+
 
 17. rm -r → folder delete karne ke liye
 
-cd ..
-rm -r practice
+
+18. cd ..
+
+
+19. rm -r practice
