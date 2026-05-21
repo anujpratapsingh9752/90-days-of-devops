@@ -258,7 +258,7 @@ What it does:
 Creates a new user account.
 
 Example:
-useradd newuser
+sudo useradd newuser
 
 --------------------------------------------------
 
@@ -268,9 +268,42 @@ What it does:
 Sets password for a user.
 
 Example:
-passwd newuser
+sudo passwd newuser
 
 --------------------------------------------------
+
+- Linux File Permission Numbers
+
+| Number | Permission | Meaning |
+|---|---|---|
+| 7 | rwx | Read + Write + Execute |
+| 6 | rw- | Read + Write |
+| 5 | r-x | Read + Execute |
+| 4 | r-- | Read Only |
+| 3 | -wx | Write + Execute |
+| 2 | -w- | Write Only |
+| 1 | --x | Execute Only |
+| 0 | --- | No Permission |
+
+---
+
+Permission Values
+
+| Symbol | Value | Meaning |
+|---|---|---|
+| r | 4 | Read |
+| w | 2 | Write |
+| x | 1 | Execute |
+
+---
+
+Easy Formula
+
+bash
+4 = Read
+2 = Write
+1 = Execute
+
 
 4. chmod +x <file>
 
@@ -298,7 +331,7 @@ What it does:
 Changes file ownership.
 
 Example:
-chown user:group file
+sudo chown user:group file
 
 ==================================================
 
