@@ -1,0 +1,10 @@
+Line-1 linux pratice
+Line-2 learning redirection
+Line-3 Using tee command
+Line-4 Reading file
+Line-5 using cat command
+Line-6 using tail command
+Line-7 using head command
+Line-8 DevOps practice
+Line-9 Learning linux
+Line-10 pratice again tee command
