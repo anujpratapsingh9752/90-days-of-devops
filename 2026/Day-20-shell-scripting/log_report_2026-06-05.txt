@@ -1,0 +1,13 @@
+Log Analysis Report
+Date: Fri Jun  5 14:49:28 IST 2026
+Log File: simple_log.log
+Total Lines: 7
+Total Errors: 4
+
+Critical Events:
+4:2026 CRITICAL Disk full
+7:2026 CRITICAL Database down
+
+Top Errors:
+      2 Connection timed out
+      1 File not found
