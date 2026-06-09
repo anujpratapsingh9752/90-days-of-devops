@@ -1,51 +1,30 @@
-Day 24 – Advanced Git: Merge, Rebase, Stash & Cherry Pick
+Day 24 - Advanced Git Notes
 
-What I Learned Today
-
-Today I learned:
+Topics Covered
 
 - Git Merge
-- Fast-forward merge
-- Merge commit
-- Merge conflict
+- Fast Forward Merge
+- Merge Commit
+- Merge Conflict
 - Git Rebase
 - Squash Merge
 - Git Stash
-- Cherry Pick
-
-These are very important Git concepts used in real DevOps and software development workflows.
+- Git Cherry Pick
 
 ---
 
 1. Git Merge
 
-What is Merge?
+What is Git Merge?
 
 Git merge is used to combine one branch into another branch.
 
-Example:
-
-git merge feature-login
-
-This merges "feature-login" branch into the current branch.
-
 ---
 
-Fast-Forward Merge
-
-What is Fast-Forward Merge?
-
-Fast-forward merge happens when the main branch has no new commits after creating the feature branch.
-
-Git simply moves the branch pointer forward.
-
----
-
-Example
-
-Create Branch
+Create Feature Branch
 
 git switch main
+
 git switch -c feature-login
 
 ---
@@ -53,42 +32,74 @@ git switch -c feature-login
 Add Commits
 
 echo "login page" > login.txt
+
 git add .
+
 git commit -m "added login page"
 
 echo "login validation" >> login.txt
+
 git add .
+
 git commit -m "added login validation"
 
 ---
 
-Merge into Main
+Merge Branch into Main
 
 git switch main
+
 git merge feature-login
 
 ---
 
-Check History
+Check Git History
 
 git log --oneline --graph --all
 
 ---
 
-Observation
+Fast Forward Merge
 
-Git performed a fast-forward merge because main branch did not move ahead.
+What is Fast Forward Merge?
+
+Fast forward merge happens when:
+
+- main branch has no new commits
+- feature branch is ahead of main
+
+Git simply moves the pointer forward.
+
+---
+
+Example Flow
+
+main
+
+A --- B
+
+feature-login
+
+A --- B --- C --- D
+
+After merge:
+
+main
+
+A --- B --- C --- D
+
+No extra merge commit created.
 
 ---
 
 Merge Commit
 
-When Does Git Create Merge Commit?
+When Does Merge Commit Happen?
 
-Git creates a merge commit when:
+Merge commit happens when:
 
 - both branches have different commits
-- main branch also moved ahead
+- histories are different
 
 ---
 
@@ -100,25 +111,29 @@ git switch -c feature-signup
 
 ---
 
-Add Commit
+Add Commit in Feature Branch
 
 echo "signup page" > signup.txt
+
 git add .
+
 git commit -m "added signup page"
 
 ---
 
-Add Commit on Main
+Add Commit in Main Branch
 
 git switch main
 
 echo "main update" > main.txt
+
 git add .
-git commit -m "main updated"
+
+git commit -m "updated main branch"
 
 ---
 
-Merge
+Merge Feature Branch
 
 git merge feature-signup
 
@@ -126,7 +141,7 @@ git merge feature-signup
 
 Observation
 
-Git created a merge commit because both branches had different histories.
+Git creates a merge commit because both branches moved separately.
 
 ---
 
@@ -138,9 +153,9 @@ Merge conflict happens when:
 
 - same file
 - same line
-- edited differently in two branches
+- modified differently in two branches
 
-Git cannot decide which change to keep.
+Git gets confused which change to keep.
 
 ---
 
@@ -156,7 +171,7 @@ hello docker
 
 ---
 
-Merge Conflict Message
+Conflict Message
 
 CONFLICT (content): Merge conflict in file.txt
 
@@ -164,16 +179,38 @@ CONFLICT (content): Merge conflict in file.txt
 
 Resolve Conflict
 
-1. Open file
-2. Remove conflict markers
-3. Keep correct code
-4. Save file
+Step 1
+
+Open file
 
 ---
 
-Final Commands
+Step 2
+
+Remove conflict markers
+
+<<<<<<< HEAD
+hello devops
+=======
+hello docker
+>>>>>>> feature
+
+---
+
+Step 3
+
+Keep correct content
+
+hello devops and docker
+
+---
+
+Step 4
+
+Add and commit
 
 git add .
+
 git commit
 
 ---
@@ -188,8 +225,6 @@ It creates a clean linear history.
 
 ---
 
-Example
-
 Create Branch
 
 git switch -c feature-dashboard
@@ -199,26 +234,32 @@ git switch -c feature-dashboard
 Add Commits
 
 echo "dashboard ui" > dashboard.txt
+
 git add .
+
 git commit -m "added dashboard ui"
 
 echo "dashboard api" >> dashboard.txt
+
 git add .
+
 git commit -m "added dashboard api"
 
 ---
 
-Main Branch New Commit
+Add Commit on Main
 
 git switch main
 
 echo "main improvement" > update.txt
+
 git add .
+
 git commit -m "main improved"
 
 ---
 
-Rebase
+Rebase Feature Branch
 
 git switch feature-dashboard
 
@@ -234,26 +275,23 @@ git log --oneline --graph --all
 
 Observation
 
-History became clean and linear.
+History becomes clean and linear.
 
 ---
 
-Rebase Conflict
+Rebase Conflict Commands
 
-If conflict happens:
+Continue Rebase
 
 git add .
+
 git rebase --continue
-
-Abort rebase:
-
-git rebase --abort
 
 ---
 
-What Does Rebase Actually Do?
+Abort Rebase
 
-Rebase takes commits from one branch and replays them on top of another branch.
+git rebase --abort
 
 ---
 
@@ -261,33 +299,35 @@ Difference Between Merge and Rebase
 
 Merge| Rebase
 Creates merge commit| No merge commit
-History becomes non-linear| History becomes linear
-Safe for shared branches| Dangerous on shared branches
-Preserves exact history| Rewrites history
+Non-linear history| Linear history
+Safe for teams| Can rewrite history
+Preserves original history| Cleaner history
 
 ---
 
-Why We Should Not Rebase Shared Commits?
+Why Rebase Should Not Be Used on Shared Branches?
 
-Because rebase changes commit history and hashes.
+Because rebase changes commit history and commit hashes.
 
-Other developers can face conflicts and broken history.
+Other developers can face problems after pulling changes.
 
 ---
 
-When to Use Rebase vs Merge?
-
-Use Rebase
-
-- before merging feature branch
-- for clean history
-- local branches
+When to Use Merge vs Rebase?
 
 Use Merge
 
-- shared branches
 - team collaboration
-- preserving original history
+- shared branches
+- preserve history
+
+---
+
+Use Rebase
+
+- local feature branches
+- clean history
+- before pull request
 
 ---
 
@@ -295,11 +335,9 @@ Use Merge
 
 What is Squash Merge?
 
-Squash merge combines multiple commits into one single commit.
+Squash merge combines multiple commits into one commit.
 
 ---
-
-Example
 
 Create Branch
 
@@ -307,11 +345,14 @@ git switch -c feature-profile
 
 ---
 
-Multiple Small Commits
+Add Multiple Small Commits
 
 git commit -m "profile page added"
+
 git commit -m "fixed typo"
+
 git commit -m "updated css"
+
 git commit -m "formatted code"
 
 ---
@@ -324,7 +365,7 @@ git merge --squash feature-profile
 
 ---
 
-Commit Changes
+Commit Squashed Changes
 
 git commit -m "added profile feature"
 
@@ -332,7 +373,7 @@ git commit -m "added profile feature"
 
 Observation
 
-All commits became one commit.
+All small commits become one clean commit.
 
 ---
 
@@ -347,42 +388,34 @@ git switch -c feature-settings
 Add Commits
 
 git commit -m "settings ui"
+
 git commit -m "settings api"
 
 ---
 
-Regular Merge
+Merge Normally
 
 git switch main
+
 git merge feature-settings
 
 ---
 
 Observation
 
-All commits remained separate.
+All commits remain separate.
 
 ---
 
-When to Use Squash Merge?
-
-Use squash merge when:
-
-- commits are messy
-- many typo fixes exist
-- clean history is needed
-
----
-
-Trade-Off of Squashing
-
-Advantages
+Squash Merge Advantages
 
 - clean history
 - easier review
 - fewer commits
 
-Disadvantages
+---
+
+Squash Merge Disadvantages
 
 - original commit history lost
 - debugging becomes harder
@@ -395,11 +428,9 @@ What is Git Stash?
 
 Git stash temporarily saves uncommitted changes.
 
-Useful when we need to switch branches quickly.
+Useful when switching branches quickly.
 
 ---
-
-Example
 
 Make Changes
 
@@ -413,7 +444,7 @@ git stash
 
 ---
 
-Stash With Message
+Stash with Message
 
 git stash push -m "working on login ui"
 
@@ -437,11 +468,11 @@ git stash apply stash@{0}
 
 ---
 
-Difference Between Stash Pop and Apply
+Difference Between Pop and Apply
 
 git stash pop| git stash apply
 Applies and removes stash| Applies but keeps stash
-Temporary use| Reusable stash
+Used once| Reusable stash
 
 ---
 
@@ -450,20 +481,18 @@ Real World Use of Stash
 Used when:
 
 - urgent bug fix comes
-- switching tasks quickly
-- unfinished work exists
+- task switching needed
+- incomplete work exists
 
 ---
 
-5. Cherry Pick
+5. Git Cherry Pick
 
 What is Cherry Pick?
 
-Cherry-pick copies a specific commit from one branch to another.
+Cherry-pick copies one specific commit from one branch to another.
 
 ---
-
-Example
 
 Create Branch
 
@@ -474,7 +503,9 @@ git switch -c feature-hotfix
 Add Commits
 
 git commit -m "first fix"
+
 git commit -m "important hotfix"
+
 git commit -m "third update"
 
 ---
@@ -491,7 +522,7 @@ g7h8i9 third update
 
 ---
 
-Cherry Pick Commit
+Cherry Pick Specific Commit
 
 git switch main
 
@@ -501,24 +532,14 @@ git cherry-pick d4e5f6
 
 Observation
 
-Only selected commit was copied.
+Only selected commit gets copied.
 
 ---
 
-When to Use Cherry Pick?
-
-Used when:
-
-- only one fix is needed
-- hotfix needed in production
-- specific feature required
-
----
-
-Problems with Cherry Picking
+Problems with Cherry Pick
 
 - duplicate commits
-- conflicts
+- merge conflicts
 - confusing history
 
 ---
@@ -579,7 +600,7 @@ git cherry-pick commit-hash
 
 ---
 
-Visualize Git History
+Git History Visualization
 
 git log --oneline --graph --all
 
@@ -589,31 +610,31 @@ Final Understanding
 
 Merge
 
-Combine branches together.
+Combines branches together.
 
 ---
 
 Rebase
 
-Create clean linear history.
+Creates clean linear history.
 
 ---
 
 Squash Merge
 
-Convert multiple commits into one commit.
+Converts multiple commits into one commit.
 
 ---
 
 Stash
 
-Temporarily save unfinished work.
+Temporarily saves unfinished work.
 
 ---
 
 Cherry Pick
 
-Copy one specific commit.
+Copies one specific commit.
 
 ---
 
@@ -621,10 +642,11 @@ DevOps Engineer Perspective
 
 In real companies:
 
-- Merge is used in Pull Requests
-- Rebase is used for clean history
-- Squash merge keeps repositories clean
+- Developers work on feature branches
+- Merge and pull requests are used daily
+- Rebase keeps history clean
+- Squash merge keeps repositories readable
 - Stash helps during urgent task switching
 - Cherry-pick is useful for production hotfixes
 
-These concepts are very important for DevOps engineers and Git interviews.
+These Git concepts are very important for DevOps engineers and interviews.
