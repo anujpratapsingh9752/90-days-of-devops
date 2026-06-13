@@ -7,15 +7,14 @@
 
 ## Before
 
-![Before Profile](before-github-profile.png%20(1).png)
-
-![Before Profile](before-github-profile.png%20(2).png)
+![Before Profile - 1](before-1.png)
+![Before Profile - 2](before-2.png)
 
 ## After
 
-![After Profile](after-github-profile.png%20(1).png)
-
-![After Profile](after-github-profile.png%20(2).png)
+![After Profile - 1](after-1.png)
+![After Profile - 2](after-2.png)
+![After Profile - 3](after-3.png)
 
 ## Learnings
 - GitHub works like a developer portfolio
