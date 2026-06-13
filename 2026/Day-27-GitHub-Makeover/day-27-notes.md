@@ -1,4 +1,4 @@
-# Day 27 - GitHub Profile Makeover -
+# Day 27 - GitHub Profile Makeover 
 
 ## What I Improved
 - Added a professional GitHub profile README
