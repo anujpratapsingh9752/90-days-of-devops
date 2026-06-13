@@ -1,17 +1,3 @@
-[6:51 pm, 13/06/2026] anujpratapsingh9752: Day 28 – Revision Day: Everything from Day 1 to Day 27
-Task
-You've covered a lot of ground in 27 days — DevOps fundamentals, Linux deep dives, Shell scripting, Python basics, Git & GitHub, and even your developer branding. Today, stop and revise. No new concepts. Just solidify what you've learned.
-
-The goal is to identify gaps, revisit topics you struggled with, and make sure you can confidently explain and use everything covered so far.
-
-What You've Covered So Far
-Days	Topic	Key Concepts
-1	DevOps & Cloud Intro	What is DevOps, SDLC, Cloud basics
-2–7	Linux Fundamentals	Architecture, commands, processes, systemd, file system hierarchy, troubleshooting, text files
-8	Cloud Server Setup	Docker, Nginx, web deployment
-9–11	Users, Permissions & Ownership	User/group …
-[7:58 pm, 13/06/2026] anujpratapsingh9752: Ye tumhare level aur aaj ki practice ke according perfect rahega 👇
-
 Day 28 - Revision Day (Day 1 to Day 27)
 
 What I Revised Today
