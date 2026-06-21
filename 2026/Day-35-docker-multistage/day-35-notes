@@ -1,0 +1,577 @@
+# 🚀 Day 35 - Multi-Stage Builds & Docker Hub Notes
+
+## 🎯 Objective
+
+Today I learned:
+
+- Single Stage Build
+- Multi-Stage Build
+- Docker Hub
+- Docker Tag
+- Docker Push
+- Docker Pull
+- Image vs Repository vs Tag
+- Docker Image Best Practices
+
+---
+
+# 1️⃣ Single Stage Build
+
+A Single Stage Dockerfile performs everything in one image.
+
+Example:
+
+```dockerfile
+FROM node:20
+
+WORKDIR /app
+
+COPY . .
+
+CMD ["node","app.js"]
+```
+
+### Advantages
+
+- Easy to understand
+- Good for beginners
+
+### Disadvantages
+
+- Large image size
+- Build dependencies remain inside image
+- Less secure
+- Not recommended for production
+
+---
+
+# 2️⃣ Multi-Stage Build
+
+Multi-stage build separates the build environment from the runtime environment.
+
+Example:
+
+```dockerfile
+# Stage 1 - Builder
+FROM node:20 AS builder
+
+WORKDIR /app
+
+COPY . .
+
+RUN echo "building app..."
+
+
+# Stage 2 - Runtime
+FROM node:20-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app /app
+
+CMD ["node","app.js"]
+```
+
+---
+
+# 3️⃣ Understanding Stages
+
+## Stage 1 (Builder)
+
+Purpose:
+
+- Build application
+- Install dependencies
+- Compile project
+- Generate build files
+
+Everything happens here.
+
+---
+
+## Stage 2 (Runtime)
+
+Purpose:
+
+- Copy only required files
+- Ignore unnecessary build tools
+- Produce smaller image
+
+---
+
+# 4️⃣ COPY --from Explained
+
+```dockerfile
+COPY --from=builder /app /app
+```
+
+Breakdown
+
+```
+COPY
+```
+
+Copy files
+
+```
+--from=builder
+```
+
+Copy from Builder Stage
+
+```
+/app
+```
+
+Source folder inside Builder Stage
+
+```
+/app
+```
+
+Destination folder inside Final Image
+
+Meaning
+
+```
+Builder Stage
+
+/app
+ │
+ └──────► Final Image
+            /app
+```
+
+---
+
+# 5️⃣ Why Multi-Stage Image is Smaller?
+
+## Single Stage
+
+Contains
+
+- Source Code
+- Build Tools
+- Dependencies
+- Cache
+- Temporary Files
+
+Everything remains inside image.
+
+Result
+
+```
+Large Image
+```
+
+---
+
+## Multi Stage
+
+Stage 1
+
+- Build project
+
+Stage 2
+
+- Copy only required files
+
+Everything else is discarded.
+
+Result
+
+```
+Smaller Image
+```
+
+---
+
+# 6️⃣ Docker Hub Workflow
+
+```
+Code
+
+↓
+
+docker build
+
+↓
+
+Local Image
+
+↓
+
+docker tag
+
+↓
+
+docker login
+
+↓
+
+docker push
+
+↓
+
+Docker Hub
+
+↓
+
+docker pull
+
+↓
+
+docker run
+```
+
+---
+
+# 7️⃣ Docker Login
+
+Login Docker Hub
+
+```bash
+docker login
+```
+
+Logout
+
+```bash
+docker logout
+```
+
+Check login
+
+```bash
+docker info
+```
+
+---
+
+# 8️⃣ Docker Tag
+
+Example
+
+```bash
+docker tag day35-multi anujpratapsingh/day35-multistage:1.0
+```
+
+Breakdown
+
+```
+docker
+```
+
+Docker command
+
+```
+tag
+```
+
+Create a new image reference
+
+```
+day35-multi
+```
+
+Existing Local Image
+
+```
+anujpratapsingh
+```
+
+Docker Hub Username
+
+```
+day35-multistage
+```
+
+Repository Name
+
+```
+1.0
+```
+
+Image Tag (Version)
+
+---
+
+## Important
+
+Docker Tag **does NOT copy or rename the image.**
+
+It creates another reference pointing to the same IMAGE ID.
+
+Example
+
+Before
+
+```
+day35-multi
+```
+
+After
+
+```
+day35-multi
+
+anujpratapsingh/day35-multistage:1.0
+```
+
+Both point to the same IMAGE ID.
+
+---
+
+# 9️⃣ Docker Push
+
+Upload image to Docker Hub.
+
+```bash
+docker push anujpratapsingh/day35-multistage:1.0
+```
+
+Flow
+
+```
+Local Image
+
+↓
+
+Internet
+
+↓
+
+Docker Hub
+```
+
+---
+
+# 🔟 Docker Pull
+
+Download image from Docker Hub.
+
+```bash
+docker pull anujpratapsingh/day35-multistage:1.0
+```
+
+Flow
+
+```
+Docker Hub
+
+↓
+
+Internet
+
+↓
+
+Local Machine
+```
+
+---
+
+# 1️⃣1️⃣ Image vs Repository vs Tag
+
+## Image
+
+A packaged application with all required dependencies.
+
+Example
+
+```
+day35-multi:latest
+```
+
+---
+
+## Repository
+
+A collection of image versions stored on Docker Hub.
+
+Example
+
+```
+day35-multistage
+```
+
+---
+
+## Tag
+
+Version of an image.
+
+Example
+
+```
+1.0
+
+1.1
+
+latest
+```
+
+---
+
+Docker Hub Structure
+
+```
+Username
+   │
+Repository
+   │
+Tags
+```
+
+Example
+
+```
+anujpratapsingh
+        │
+day35-multistage
+        │
+ ├── 1.0
+ ├── 1.1
+ └── latest
+```
+
+---
+
+# 1️⃣2️⃣ Image Size Comparison
+
+| Image | Size |
+|-------|------|
+| Single Stage | Large |
+| Multi Stage | Smaller |
+
+Reason
+
+Single Stage contains
+
+- Build tools
+- Dependencies
+- Cache
+- Temporary files
+
+Multi Stage copies only required files.
+
+---
+
+# 1️⃣3️⃣ Best Practices
+
+✅ Use Multi-Stage Builds
+
+✅ Use Alpine Images
+
+✅ Use Specific Image Tags
+
+✅ Don't use latest for base images
+
+✅ Run container as Non-Root User
+
+✅ Keep images small
+
+---
+
+# 1️⃣4️⃣ Important Commands
+
+Build
+
+```bash
+docker build -t day35-multi .
+```
+
+Run
+
+```bash
+docker run day35-multi
+```
+
+Images
+
+```bash
+docker images
+```
+
+Tag
+
+```bash
+docker tag day35-multi anujpratapsingh/day35-multistage:1.0
+```
+
+Push
+
+```bash
+docker push anujpratapsingh/day35-multistage:1.0
+```
+
+Pull
+
+```bash
+docker pull anujpratapsingh/day35-multistage:1.0
+```
+
+Login
+
+```bash
+docker login
+```
+
+Logout
+
+```bash
+docker logout
+```
+
+---
+
+# 1️⃣5️⃣ Interview Questions
+
+### What is Multi-Stage Build?
+
+A Docker feature that separates build and runtime stages to create smaller and more secure images.
+
+---
+
+### What is COPY --from?
+
+It copies files from one build stage to another stage.
+
+---
+
+### Why use Alpine?
+
+Because Alpine images are lightweight and reduce final image size.
+
+---
+
+### What is Docker Tag?
+
+A tag is a version or label used to identify an image.
+
+---
+
+### Difference between Image and Repository?
+
+Image = Packaged Application
+
+Repository = Collection of Image Versions
+
+---
+
+### Difference between Push and Pull?
+
+Push → Upload image to Docker Hub
+
+Pull → Download image from Docker Hub
+
+---
+
+# ⭐ Key Takeaways
+
+- Multi-stage builds create optimized production images.
+- Docker Tag creates a new image reference.
+- Docker Push uploads images to Docker Hub.
+- Docker Pull downloads images from Docker Hub.
+- Repository stores multiple image versions.
+- Tags help manage different versions of the same image.
+- Alpine images reduce image size significantly.
