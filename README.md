@@ -8,7 +8,7 @@ This repository contains my daily DevOps learning and hands-on practice.
 - Shell Scripting
 - Docker
 - Networking Basics
-- AWS Basics
+- GitHub Action ( CI )
 
 ## Objective
 To build strong DevOps fundamentals with daily hands-on practice.
