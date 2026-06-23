@@ -1,0 +1,24 @@
+---
+
+server:
+  name: ubuntu-server
+  ip: 192.156.1.10
+  port: 22
+
+database:
+  host: localhost
+  name: devops_db
+  credentials:
+    user: anuj
+    password: mypassword
+
+startup_script: |
+  sudo apt update
+  sudo apt install nginx -y
+  sudo systemctl start nginx
+  echo "server ready"
+
+description: >
+  This server is used
+  for learnig YAML
+  and DevOps basics.
