@@ -25,7 +25,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - run: python --version
-
+```
 ---
 
 ## 2. Manual Workflow (workflow_dispatch)
