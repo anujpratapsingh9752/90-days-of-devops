@@ -25,7 +25,6 @@ jobs:
           python-version: ${{ matrix.python-version }}
 
       - run: python --version
-````
 
 ---
 
